@@ -1,0 +1,17 @@
+---
+title: "About"
+---
+
+**Education**
+
+I graduated from Arcadia University in May 2024 with Bachelor's Degrees in both Biology and Mathematics. My Biology thesis project was library based focusing on the use of small molecules for developing a treatment for AL Amyloidosis. For my math thesis project, I worked in a group to explore whether or not there were demographic factors that could be used to predict diagnosis probability within the Undiagnosed Diseases Network.
+
+**Professional Interests**
+
+As I sit through various seminars and presentations my professional interests are expanding. However, I have always had a fascination with clinical trials and am planning on pursuing a certificate. Additionally, I have found genomics, as well as other -omics I have learned about to be interesting. I am a member of the genomics working group and hoping to pursue research in one of these areas.
+
+**Personal Information/Fun Facts**
+
+A little bit more about me! I am from Baltimore, Maryland so I actually came home for grad school. I am currently living at home with my parents, three brothers, and very spoiled husky! I am a very competitive person, and was a competitive swimmer for all of undergrad. I was a freestyle and backstroker, and placed top 3 in the 100/200 backstroke throughout my college career, with a total of 8 individual and relay medals. I enjoy baking, and have found that I have started stress baking my way through grad school. When I have free time, I like hanging out with my dog, listening to music, or doing just about anything outside! Attached below is a picture of my dog, Taz!
+
+![](tazzy.png){width="267"}

@@ -1,0 +1,7 @@
+---
+title: "Introduction"
+---
+
+Hi! My name is Grace Brooks. I am a first year ScM student in Biostatistics at BSPH!
+
+![](grace.brooks.png){width="342"}

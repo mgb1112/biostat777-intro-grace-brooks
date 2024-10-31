@@ -1,0 +1,32 @@
+---
+title: "Example Analysis"
+---
+
+**Information on Data**
+
+question i am answering? intended audience for analysis? describe and link where data is coming from?
+
+**Data Dictionary**
+
+link to data dictionary
+
+**Data Analysis**
+
+```{r}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+knitr::write_bib("ggplot2", file = "project_1_refs.bib")
+#5 function data wrangling
+#at least 3 plots (3 dif geom() options and at least one facet) Plots should have title, subtitle, caption, axis labels
+```
+
+#image or table from web/saved locally #2 callouts and 1 margin content
+
+**Summary**
+
+#4-6 paragraph summary
+
+**Functions Used**
+
+#make a list lol
