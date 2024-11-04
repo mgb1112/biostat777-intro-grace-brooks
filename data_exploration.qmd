@@ -4,11 +4,11 @@ title: "Example Analysis"
 
 **Information on Data**
 
-question i am answering? intended audience for analysis? describe and link where data is coming from?
+With this data analysis, I intend to explore the offensive statistics of MLB teams in 2023. Specifically, I want to dive into the "3 True Outcomes" which are the offensive outcomes that are not reliant on the defense (strikeout, walk, and home run). On top of these, I would like to look at hits and the various breakdowns of numbers of singles, double, triples, and home runs throughout leagues and teams. This data analysis would be helpful for baseball statisticians, avid baseball fans, and potentily the MLB (although I'm sure they have their own people doing more in-depth analysese than this. The data that I am using for this sample data analysis is from the "Lahman" R package. This R package stores tables from the 'Sean Lahman Baseball Database'. Specifically, I focused on the "Teams" table, which houses yearly stats and standings for MLB teams.
 
 **Data Dictionary**
 
-link to data dictionary
+<https://www.rdocumentation.org/packages/Lahman/versions/12.0-0/topics/Teams>
 
 **Data Analysis**
 
@@ -16,17 +16,99 @@ link to data dictionary
 library(ggplot2)
 library(tidyr)
 library(dplyr)
+library(quantreg)
+library(Lahman)
+data(Teams)
 knitr::write_bib("ggplot2", file = "project_1_refs.bib")
-#5 function data wrangling
-#at least 3 plots (3 dif geom() options and at least one facet) Plots should have title, subtitle, caption, axis labels
+#filter dataset down to only the entries from the year 2023
+teams_2023 <- filter(Teams, yearID == 2023)
+#add a row for team batting averages for the year
+teams_2023 <- mutate(teams_2023, BA = H/AB)
+#getting a better idea of what the data looks like split by league AL/NL
+glimpse(teams_2023) %>% group_by(lgID)
+
+#arrange data for our first plot
+plot_one_data <- subset(teams_2023, select = c(yearID, lgID, teamID, BB, SO, HR))
+plot_one_data <- pivot_longer(plot_one_data, cols = c(BB, SO, HR), names_to = 'outcome', values_to = 'count')
+
+#plot one: geom_point() of 3 true outcomes faceted by league
+ggplot(plot_one_data, aes(x = teamID , y = count, color = outcome)) + geom_point() + labs(title = "3 True Offensive Outcomes", subtitle = "Breakdown of strikeouts, walks, and homeruns faceted by League", caption = "Data from Teams table from the Lahman R package", x = "Team ID", y = "Counts of Each Outcome") + theme_dark() + theme(axis.text.x = element_text(size = 6, angle = 90)) + facet_wrap(~lgID, scales = "free_x") + scale_color_manual(values = c("aquamarine","lightcoral", "gold"))
+```
+
+```{r}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(quantreg)
+library(Lahman)
+data(Teams)
+
+#filter dataset down to only the entries from the year 2023
+teams_2023 <- filter(Teams, yearID == 2023)
+#add a row for team batting averages for the year
+teams_2023 <- mutate(teams_2023, BA = H/AB)
+
+#arrange data for our second plot
+plot_two_data <- subset(teams_2023, select = c(yearID, lgID, teamID, H, X2B, X3B, HR))
+plot_two_data <- mutate(plot_two_data, singles = (H-X2B-X3B-HR))
+plot_two_data <- pivot_longer(plot_two_data, cols = c(X2B, X3B, HR, singles), names_to = 'bases', values_to = 'count')
+
+#plot two: geom_bar() of the hit breakdowns (hit, single, double, triple, hr)
+ggplot(plot_two_data, aes( x = teamID, y = H, fill = bases)) + geom_bar(position = "stack", stat = "identity") + labs(title = "Hit Results by Team in 2023", subtitle = "Broken down by single, double, triple, and HR", caption = "Data from Teams table in Lahman R package", x = "Team ID", y = "Number of Hits") + theme_dark() + theme(axis.text.x = element_text(angle = 90)) + scale_fill_manual(values = c("cadetblue1", "coral", "lawngreen", "plum2"))
+```
+
+```{r}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(quantreg)
+library(Lahman)
+data(Teams)
+
+#filter dataset down to only the entries from the year 2023
+teams_2023 <- filter(Teams, yearID == 2023)
+#add a row for team batting averages for the year
+teams_2023 <- mutate(teams_2023, BA = H/AB)
+#get an idea of the range of Batting averages we are looking at
+summarise(teams_2023, min(BA), max(BA))
+summarise(teams_2023, mean = mean(BA))
+
+#plot three: league batting averages
+ggplot(teams_2023, aes( x = teamID, y = BA)) + geom_point(color = c("pink")) + geom_hline(yintercept = 0.2482603, color = c("lightblue")) + labs(title = "Team Batting Averages in 2023", subtitle = "League Batting Averages Fall into a Small Range", caption = "Data from Teams table in the Lahman R package", y = "Batting Averages", x = "Team ID") + theme_dark() + theme(axis.text.x = element_text(angle = 90)) 
 ```
 
 #image or table from web/saved locally #2 callouts and 1 margin content
 
 **Summary**
 
-#4-6 paragraph summary
+The three plots I decided to make were (1) The Three True Offensive Outcomes of Baseball faceted by the League, (2) The breakdown of hits for each team in the league by number of bases, and (3) The team batting averages in 2023 with a line representing the total league average. In the first plot, the spikes roughly lined up with the teams. It was rare that a team had a spike in one of the three outcomes, and not in the others. The second plot I left at counts because I wanted to be able to see the spikes in numbers. It was interesting to see that the thickness of the different bands seems to be pretty similar for every team. Had I looked at the bands as percentages, I wonder how similar they all would have been. The final plot looks at batting average. I found this really interesting as there is a pretty small range in betting averages across the league. I wonder how much this would vary if we looked at the team by year, which would require a slightly different data set. I think that this is a very baseline analysis that could be explored a lot more. Baseball is a complex sport so looking at these are definitely only snapshots. I think as a whole, this reveals that looking at strictly offensive statistics, we cannot capture the game as a whole. If we look at TEX who won the World Series in 2023, they are above average, but not the peak in any of our plots. This shows that there is a lot more going on behind the scenes than just hits, strikeouts, and walks.
 
 **Functions Used**
 
-#make a list lol
+-   install.packages
+
+-   library
+
+-   filter()
+
+-   mutate()
+
+-   glimpse()
+
+-   group_by()
+
+-   summarise()
+
+-   min()
+
+-   max()
+
+-   mean()
+
+-   pivot_longer()
+
+-   geom_point()
+
+-   geom_bar()
+
+-   geom_hline()
