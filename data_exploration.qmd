@@ -4,11 +4,17 @@ title: "Example Analysis"
 
 **Information on Data**
 
-With this data analysis, I intend to explore the offensive statistics of MLB teams in 2023. Specifically, I want to dive into the "3 True Outcomes" which are the offensive outcomes that are not reliant on the defense (strikeout, walk, and home run). On top of these, I would like to look at hits and the various breakdowns of numbers of singles, double, triples, and home runs throughout leagues and teams. This data analysis would be helpful for baseball statisticians, avid baseball fans, and potentily the MLB (although I'm sure they have their own people doing more in-depth analysese than this. The data that I am using for this sample data analysis is from the "Lahman" R package. This R package stores tables from the 'Sean Lahman Baseball Database'. Specifically, I focused on the "Teams" table, which houses yearly stats and standings for MLB teams.
+With this data analysis, I intend to explore the offensive statistics of MLB teams in 2023. Specifically, I want to dive into the "3 True Outcomes of Baseball". On top of these, I would like to look at hits and the various breakdowns of numbers of singles, double, triples, and home runs throughout all teams as well as team batting average and how it compares to the league average. This data analysis would be helpful for baseball statisticians, avid baseball fans, and potentially the MLB (although I'm sure they have their own people doing more in-depth analyses than this. The data that I am using for this sample data analysis is from the "Lahman" R package. This R package stores tables from the 'Sean Lahman Baseball Database'. Specifically, I focused on the "Teams" table, which houses yearly stats and standings for MLB teams.
+
+::: callout-note
+The Three True Outcomes of Baseball are the offensive outcomes that do not rely on the defensive team (other than pitcher and catcher) to occur. These are walks (BB), strikeouts(SO), and home runs(HR)
+:::
 
 **Data Dictionary**
 
 <https://www.rdocumentation.org/packages/Lahman/versions/12.0-0/topics/Teams>
+
+![](Major_League_Baseball_logo.svg.webp){fig-align="center"}
 
 **Data Analysis**
 
@@ -57,7 +63,13 @@ plot_two_data <- pivot_longer(plot_two_data, cols = c(X2B, X3B, HR, singles), na
 ggplot(plot_two_data, aes( x = teamID, y = H, fill = bases)) + geom_bar(position = "stack", stat = "identity") + labs(title = "Hit Results by Team in 2023", subtitle = "Broken down by single, double, triple, and HR", caption = "Data from Teams table in Lahman R package", x = "Team ID", y = "Number of Hits") + theme_dark() + theme(axis.text.x = element_text(angle = 90)) + scale_fill_manual(values = c("cadetblue1", "coral", "lawngreen", "plum2"))
 ```
 
+::: callout-note
+This plot shows pretty consistent band thicknesses across the teams with slight spikes where teams have more hits total. Interesting further analysis could look at this same plot as percentages instead of counts.
+:::
+
 ```{r}
+#| fig-cap: "The horizontal line in this plot represents the League Batting Average for the year, with points above it representing teams hitting above the league average and points below representing teams hitting under the league average."
+#| cap-location: margin
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -76,8 +88,6 @@ summarise(teams_2023, mean = mean(BA))
 #plot three: league batting averages
 ggplot(teams_2023, aes( x = teamID, y = BA)) + geom_point(color = c("pink")) + geom_hline(yintercept = 0.2482603, color = c("lightblue")) + labs(title = "Team Batting Averages in 2023", subtitle = "League Batting Averages Fall into a Small Range", caption = "Data from Teams table in the Lahman R package", y = "Batting Averages", x = "Team ID") + theme_dark() + theme(axis.text.x = element_text(angle = 90)) 
 ```
-
-#image or table from web/saved locally #2 callouts and 1 margin content
 
 **Summary**
 
