@@ -1,0 +1,46 @@
+---
+title: "part_3"
+---
+
+```{bash}
+wget https://raw.githubusercontent.com/stephaniehicks/jhustatprogramming2024/refs/heads/main/projects/01-project/students.csv
+```
+```{bash}
+cat students.csv
+```
+
+```{bash}
+head -n 5 students.csv
+```
+
+```{bash}
+tail -n 3 students.csv
+```
+
+```{bash}
+wc -l students.csv
+```
+
+```{bash}
+grep "Math" students.csv
+```
+
+```{bash}
+grep "F," students.csv
+```
+
+```{bash}
+sort -k3 -t',' students.csv
+```
+
+```{bash}
+cut -d ',' -f 2 students.csv | sort -u
+```
+
+```{bash}
+awk -F ',' '{sum += $5} END {print sum/10}' students.csv
+```
+
+```{bash}
+sed 's/Math/Mathematics/' stuednts.csv
+```
