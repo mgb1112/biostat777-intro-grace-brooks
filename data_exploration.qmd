@@ -5,6 +5,7 @@ title: "Example Analysis"
 **Information on Data**
 
 With this data analysis, I intend to explore the offensive statistics of MLB teams in 2023. Specifically, I want to dive into the "3 True Outcomes of Baseball". On top of these, I would like to look at hits and the various breakdowns of numbers of singles, double, triples, and home runs throughout all teams as well as team batting average and how it compares to the league average. This data analysis would be helpful for baseball statisticians, avid baseball fans, and potentially the MLB (although I'm sure they have their own people doing more in-depth analyses than this. The data that I am using for this sample data analysis is from the "Lahman" R package. This R package stores tables from the 'Sean Lahman Baseball Database'. Specifically, I focused on the "Teams" table, which houses yearly stats and standings for MLB teams.
+[@Lahman]
 
 ::: callout-note
 The Three True Outcomes of Baseball are the offensive outcomes that do not rely on the defensive team (other than pitcher and catcher) to occur. These are walks (BB), strikeouts(SO), and home runs(HR)
@@ -13,8 +14,10 @@ The Three True Outcomes of Baseball are the offensive outcomes that do not rely 
 **Data Dictionary**
 
 <https://www.rdocumentation.org/packages/Lahman/versions/12.0-0/topics/Teams>
+[@Teams]
 
 ![](Major_League_Baseball_logo.svg.webp){fig-align="center"}
+[@MLB]
 
 **Data Analysis**
 
@@ -88,6 +91,7 @@ summarise(teams_2023, mean = mean(BA))
 #plot three: league batting averages
 ggplot(teams_2023, aes( x = teamID, y = BA)) + geom_point(color = c("pink")) + geom_hline(yintercept = 0.2482603, color = c("lightblue")) + labs(title = "Team Batting Averages in 2023", subtitle = "League Batting Averages Fall into a Small Range", caption = "Data from Teams table in the Lahman R package", y = "Batting Averages", x = "Team ID") + theme_dark() + theme(axis.text.x = element_text(angle = 90)) 
 ```
+[@Lahman]
 
 **Summary**
 
